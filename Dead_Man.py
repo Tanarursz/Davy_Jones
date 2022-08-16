@@ -13,7 +13,7 @@ def command():
     while True:
         if input("do u want to add ships? y/n (dc chat url): ") == "y":
             ship = input("which ship do you want to sink?: ")
-            with open("urls.txt", "a") as sh:
+            with open(r".\txts\urls.txt", "a") as sh:
                 sh.write("\n"+ship)
             continue
         break
@@ -26,13 +26,15 @@ def command():
 def attack_the_traitors():
 
     def reload():
-        with open("urls.txt", "r") as u:    urls = u.readlines()
+        with open(r".\txts\urls.txt", "r") as u:    urls = u.readlines()
 
-        with open("szöveg.txt", "r") as s:    massages = s.readlines()
+        with open(r".\txts\szöveg.txt", "r") as s:    massages = s.readlines()
+        
+        with open(r".\txts\aut.txt", "r") as au: aut = au.readline()
 
         random_massage = massages[random.randint(0, len(massages) - 1)]
         random_image = images[random.randint(0, len(images) - 1)]
-        return random_massage, random_image, urls
+        return random_massage, random_image, urls, aut
 
     for i in range(100):
 
@@ -41,7 +43,7 @@ def attack_the_traitors():
         }
 
         header = {
-            "authorization": "NDMyOTIxODA3Mzc3NTMwODgw.GtZKgk.HHJUf9BU5HmqYH3FS4rPLW-QgEH6gmlYwX6hFE"
+            "authorization": reload()[3]
         }
 
         for u in range(len(reload()[2])):
